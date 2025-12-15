@@ -4,77 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abécédaire Aléatoire</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            overflow: hidden;
-        }
-
-        .screen {
-            display: none;
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .screen.active {
-            display: flex;
-        }
-
-        button {
-            padding: 20px 60px;
-            font-size: 24px;
-            background-color: white;
-            color: #667eea;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        #letter-screen {
-            cursor: pointer;
-            user-select: none;
-        }
-
-        #letter {
-            font-size: min(80vh, 80vw);
-            font-weight: bold;
-            line-height: 1;
-            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        #end-message {
-            font-size: 48px;
-            margin-bottom: 40px;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Écran d'accueil -->
@@ -93,57 +26,21 @@
         <button onclick="restartGame()">Recommencer</button>
     </div>
 
-    <script>
-        // Alphabet français
-        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-        let shuffledAlphabet = [];
-        let currentIndex = 0;
+    <!-- Écran de test -->
+    <div id="test-screen" class="screen">
+        <div id="alphabet-grid"></div>
+        <button id="close-test" onclick="closeTest()">Fermer</button>
+    </div>
 
-        // Algorithme de Fisher-Yates pour mélanger l'alphabet
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
+    <!-- Bouton test fixe -->
+    <button id="test-button" onclick="showTest()">Test</button>
 
-        // Affiche un écran spécifique
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-        }
+    <!-- Bouton recommencer fixe -->
+    <button id="restart-button" onclick="restartGame()">Recommencer</button>
 
-        // Démarre le jeu
-        function startGame() {
-            shuffledAlphabet = shuffleArray(alphabet);
-            currentIndex = 0;
-            showLetter();
-            showScreen('letter-screen');
-        }
+    <!-- Compteur de progression -->
+    <div id="counter"></div>
 
-        // Affiche la lettre courante
-        function showLetter() {
-            document.getElementById('letter').textContent = shuffledAlphabet[currentIndex];
-        }
-
-        // Passe à la lettre suivante
-        function nextLetter() {
-            currentIndex++;
-            if (currentIndex >= shuffledAlphabet.length) {
-                showScreen('end-screen');
-            } else {
-                showLetter();
-            }
-        }
-
-        // Retourne à l'écran d'accueil
-        function restartGame() {
-            showScreen('welcome-screen');
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
