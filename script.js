@@ -64,6 +64,14 @@ function nextLetter() {
     }
 }
 
+// Retourne à la lettre précédente
+function previousLetter() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        showLetter();
+    }
+}
+
 // Retourne à l'écran d'accueil
 function restartGame() {
     showScreen('welcome-screen');
@@ -88,3 +96,16 @@ function showTest() {
 function closeTest() {
     showScreen('welcome-screen');
 }
+
+// Gestion de la navigation au clavier
+document.addEventListener('keydown', function(event) {
+    // Vérifie si on est sur l'écran des lettres
+    const letterScreen = document.getElementById('letter-screen');
+    if (letterScreen.classList.contains('active')) {
+        if (event.key === 'ArrowLeft') {
+            previousLetter();
+        } else if (event.key === 'ArrowRight') {
+            nextLetter();
+        }
+    }
+});
