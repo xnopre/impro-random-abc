@@ -15,6 +15,43 @@
         <button onclick="startGame()">Démarrer</button>
     </div>
 
+    <!-- Bouton aide (visible uniquement sur l'écran d'accueil) -->
+    <button id="help-button" onclick="showHelp()">Aide</button>
+
+    <!-- Modal d'aide -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeHelp()">&times;</span>
+            <h2>À propos de l'Abécédaire Aléatoire</h2>
+            <div class="modal-body">
+                <h3>À quoi ça sert ?</h3>
+                <p>
+                    L'Abécédaire Aléatoire est un outil pour le théêtre d'impro, pour animer une reprise
+                    de type "Abécédaire aléatoire".
+                </p>
+
+                <h3>Comment l'utiliser ?</h3>
+                <ol>
+                    <li>Cliquez sur le bouton <strong>"Démarrer"</strong> sur l'écran d'accueil</li>
+                    <li>Une première lettre apparaît en grand à l'écran</li>
+                    <li><strong>Cliquez n'importe où</strong> sur l'écran pour passer à la lettre suivante</li>
+                    <li>Continuez jusqu'à avoir parcouru toutes les lettres de l'alphabet</li>
+                    <li>À la fin, cliquez sur <strong>"Recommencer"</strong> pour une nouvelle séquence aléatoire</li>
+                </ol>
+
+                <p class="tip">
+                    💡 <strong>Astuce :</strong> Vous pouvez utiliser les flèches ← et → de votre clavier
+                    pour naviguer entre les lettres, et le bouton "Recommencer" est toujours disponible
+                    en bas à droite pendant le jeu.
+                </p>
+
+                <p>
+                    Développé avec passion par <a href="https://github.com/xnopre" target="_blank">Xavier NOPRE</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Écran d'affichage des lettres -->
     <div id="letter-screen" class="screen" onclick="nextLetter()">
         <div id="letter"></div>

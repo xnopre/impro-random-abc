@@ -24,19 +24,23 @@ function showScreen(screenId) {
     const testButton = document.getElementById('test-button');
     const restartButton = document.getElementById('restart-button');
     const counter = document.getElementById('counter');
+    const helpButton = document.getElementById('help-button');
 
     if (screenId === 'welcome-screen') {
         testButton.style.display = 'block';
         restartButton.style.display = 'none';
         counter.style.display = 'none';
+        helpButton.style.display = 'block';
     } else if (screenId === 'letter-screen') {
         testButton.style.display = 'none';
         restartButton.style.display = 'block';
         counter.style.display = 'block';
+        helpButton.style.display = 'none';
     } else {
         testButton.style.display = 'none';
         restartButton.style.display = 'none';
         counter.style.display = 'none';
+        helpButton.style.display = 'none';
     }
 }
 
@@ -97,6 +101,18 @@ function closeTest() {
     showScreen('welcome-screen');
 }
 
+// Affiche la modal d'aide
+function showHelp() {
+    const modal = document.getElementById('help-modal');
+    modal.classList.add('active');
+}
+
+// Ferme la modal d'aide
+function closeHelp() {
+    const modal = document.getElementById('help-modal');
+    modal.classList.remove('active');
+}
+
 // Gestion de la navigation au clavier
 document.addEventListener('keydown', function(event) {
     // Vérifie si on est sur l'écran des lettres
@@ -107,5 +123,19 @@ document.addEventListener('keydown', function(event) {
         } else if (event.key === 'ArrowRight') {
             nextLetter();
         }
+    }
+
+    // Ferme la modal avec la touche Escape
+    const helpModal = document.getElementById('help-modal');
+    if (event.key === 'Escape' && helpModal.classList.contains('active')) {
+        closeHelp();
+    }
+});
+
+// Ferme la modal si on clique en dehors du contenu
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('help-modal');
+    if (event.target === modal) {
+        closeHelp();
     }
 });
